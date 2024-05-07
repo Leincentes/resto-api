@@ -50,10 +50,10 @@ This API provides endpoints for managing restaurants, food items, categories, an
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your/repository.git`
+1. Clone the repository: `git clone https://github.com/Leincentes/resto-api.git`
 2. Install dependencies: `npm install`
 3. Set up environment variables: Create a `.env` file and configure necessary variables.
-4. Start the server: `npm start`
+4. Start the server: `npm run dev`
 
 ## Technologies Used
 
