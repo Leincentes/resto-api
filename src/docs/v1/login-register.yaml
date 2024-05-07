@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: User Authentication API
+  description: API for user registration and authentication
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationData'
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+  /login:
+    post:
+      summary: Log in with existing user credentials
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginData'
+      responses:
+        '200':
+          description: User successfully logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized - Invalid credentials
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UserRegistrationData:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        address:
+          type: array
+          items:
+            type: string
+        phone:
+          type: string
+        usertype:
+          type: string
+          enum:
+            - client
+            - admin
+            - vendor
+            - driver
+      required:
+        - username
+        - email
+        - password
+        - phone
+        - usertype
+    RegistrationResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/UserData'
+    UserLoginData:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+    LoginResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserData'
+    UserData:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        address:
+          type: array
+          items:
+            type: string
+        phone:
+          type: string
+        usertype:
+          type: string
+        profile:
+          type: string
+        answer:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time

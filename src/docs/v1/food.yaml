@@ -1,0 +1,141 @@
+openapi: 3.0.0
+info:
+  title: Food Management API
+  description: API for managing foods
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /foods:
+    post:
+      summary: Create a new food
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodData'
+      responses:
+        '200':
+          description: Food created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodResponse'
+        '500':
+          description: Internal server error
+    get:
+      summary: Get all foods
+      responses:
+        '200':
+          description: List of all foods
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FoodData'
+        '404':
+          description: No foods found
+        '500':
+          description: Internal server error
+  /foods/{id}:
+    get:
+      summary: Get food by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Food retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodData'
+        '404':
+          description: Food not found
+        '500':
+          description: Internal server error
+    put:
+      summary: Update food by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodData'
+      responses:
+        '200':
+          description: Food updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodData'
+        '404':
+          description: Food not found
+        '500':
+          description: Internal server error
+    delete:
+      summary: Delete food by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Food deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodData'
+        '404':
+          description: Food not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    FoodData:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        imageUrl:
+          type: string
+        foodTags:
+          type: array
+          items:
+            type: string
+        category:
+          type: string
+        code:
+          type: string
+        isAvailable:
+          type: boolean
+        restaurant:
+          type: string
+        rating:
+          type: number
+    FoodResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/FoodData'

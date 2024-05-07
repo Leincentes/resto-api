@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Management System API</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .jumbotron {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .jumbotron h1 {
+            font-size: 3rem;
+        }
+        .lead {
+            font-size: 1.25rem;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        .api-docs-link {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Restaurant Management System API</h1>
+            <p class="lead">Welcome to the Restaurant Management System API. This API provides endpoints for managing restaurants, food items, categories, and user authentication.</p>
+            <hr class="my-4">
+            <p>Get started by exploring the API endpoints and data models.</p>
+            <a class="btn btn-primary btn-lg" href="http://localhost:3000/api/v1/docs" role="button">API Documentation</a>
+        </div>
+
+        <div id="endpoints">
+            <h2>API Endpoints</h2>
+            <p>Below are the main endpoints provided by the API:</p>
+            <ul>
+                <li>Authentication
+                    <ul>
+                        <li>POST /register</li>
+                        <li>POST /login</li>
+                    </ul>
+                </li>
+                <li>Restaurants
+                    <ul>
+                        <li>POST /restaurants</li>
+                        <li>GET /restaurants</li>
+                        <li>GET /restaurants/{id}</li>
+                        <li>PUT /restaurants/{id}</li>
+                        <li>DELETE /restaurants/{id}</li>
+                    </ul>
+                </li>
+                <li>Foods
+                    <ul>
+                        <li>POST /foods</li>
+                        <li>GET /foods</li>
+                        <li>GET /foods/{id}</li>
+                        <li>PUT /foods/{id}</li>
+                        <li>DELETE /foods/{id}</li>
+                    </ul>
+                </li>
+                <li>Categories
+                    <ul>
+                        <li>POST /categories</li>
+                        <li>GET /categories</li>
+                        <li>GET /categories/{id}</li>
+                        <li>PUT /categories/{id}</li>
+                        <li>DELETE /categories/{id}</li>
+                    </ul>
+                </li>
+                <li>Users
+                    <ul>
+                        <li>GET /users/{id}</li>
+                        <li>PUT /users/{id}</li>
+                        <li>PUT /users/update-password/{id}</li>
+                        <li>PUT /users/reset-password/{id}</li>
+                        <li>DELETE /users/{id}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+openapi: 3.0.0
+info:
+  title: Restaurant Management API
+  description: API for managing restaurants
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /restaurants:
+    post:
+      summary: Create a new restaurant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestaurantData'
+      responses:
+        '200':
+          description: Restaurant created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestaurantResponse'
+        '500':
+          description: Internal server error
+    get:
+      summary: Get all restaurants
+      responses:
+        '200':
+          description: List of all restaurants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RestaurantData'
+        '404':
+          description: No restaurants found
+        '500':
+          description: Internal server error
+  /restaurants/{id}:
+    get:
+      summary: Get restaurant by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Restaurant retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestaurantData'
+        '404':
+          description: Restaurant not found
+        '500':
+          description: Internal server error
+    put:
+      summary: Update restaurant by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestaurantData'
+      responses:
+        '200':
+          description: Restaurant updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestaurantData'
+        '404':
+          description: Restaurant not found
+        '500':
+          description: Internal server error
+    delete:
+      summary: Delete restaurant by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Restaurant deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestaurantData'
+        '404':
+          description: Restaurant not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    RestaurantData:
+      type: object
+      properties:
+        title:
+          type: string
+        imageUrl:
+          type: string
+        foods:
+          type: array
+          items:
+            type: string
+        time:
+          type: string
+        pickup:
+          type: boolean
+        delivery:
+          type: boolean
+        isOpen:
+          type: boolean
+        logoUrl:
+          type: string
+        rating:
+          type: number
+        ratingCount:
+          type: string
+        code:
+          type: string
+        coords:
+          $ref: '#/components/schemas/Coords'
+    RestaurantResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/RestaurantData'
+    Coords:
+      type: object
+      properties:
+        id:
+          type: string
+        latitude:
+          type: number
+        latitudeDelta:
+          type: number
+        longitude:
+          type: number
+        longitudeDelta:
+          type: number
+        address:
+          type: string
+        title:
+          type: string

@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: Category Management API
+  description: API for managing categories
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /categories:
+    post:
+      summary: Create a new category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryData'
+      responses:
+        '200':
+          description: Category created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryResponse'
+        '500':
+          description: Internal server error
+    get:
+      summary: Get all categories
+      responses:
+        '200':
+          description: List of all categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryData'
+        '404':
+          description: No categories found
+        '500':
+          description: Internal server error
+  /categories/{id}:
+    get:
+      summary: Get category by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Category retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryData'
+        '404':
+          description: Category not found
+        '500':
+          description: Internal server error
+    put:
+      summary: Update category by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryData'
+      responses:
+        '200':
+          description: Category updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryData'
+        '404':
+          description: Category not found
+        '500':
+          description: Internal server error
+    delete:
+      summary: Delete category by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Category deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryData'
+        '404':
+          description: Category not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    CategoryData:
+      type: object
+      properties:
+        title:
+          type: string
+        imageUrl:
+          type: string
+    CategoryResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/CategoryData'
